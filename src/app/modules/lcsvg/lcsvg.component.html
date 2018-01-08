@@ -1,0 +1,37 @@
+<svg *ngIf="svg" [attr.id]="svg.svg['@id']" [attr.xmlns]="svg.svg['@xmlns']" [attr.xmlns:xlink]="svg.svg['@xmlns:xlink']" [attr.viewBox]="svg.svg['@viewBox']"><!-- SVG -->
+    <svg:defs *ngIf="svg.svg.defs"><!-- SVG Defs -->
+        <svg:style type="text/css" *ngIf="svg.svg.defs.style">{{svg.svg.defs.style}}</svg:style>
+        <svg:clipPath *ngIf="svg.svg.defs.clipPath" [attr.id]="svg.svg.defs.clipPath['@id']" [attr.g]="svg.svg.defs.clipPath" lc-svg-g></svg:clipPath>
+    </svg:defs>
+    <title *ngIf="svg.svg.title">{{svg.svg.title}}</title>
+    <ng-container *ngIf="!config || !config.layerscope">
+        <svg:g *ngFor="let g of svg.svg.g; let i = index;"
+               [g]="g"
+               [config]="config"
+               [clickenable]="config && config.click ? config.click.indexOf(i) > -1 : false"
+               [mouseenable]="config && config.mouseover ? config.mouseover.indexOf(i) > -1 : false"
+               [cssenable]="config && config.classscope.length > -1 ? config.classscope.indexOf(i) > -1 : false"
+               [attr.id]="g['@id']"
+               [attr.class]="g['@class']"
+               [attr.style]="g['@style']"
+               [attr.transform]="g['@transform']"
+               (shapeClick)="onShapeClick($event)"
+               (shapeMouse)="onShapeMouse($event)"
+               lc-svg-g></svg:g><!-- SVG Shape Data -->
+    </ng-container>
+    <ng-container *ngIf="config && config.layerscope ? config.layerscope.length > 0 : false">
+        <svg:g *ngFor="let i of config.layerscope"
+               [g]="svg.svg.g[i]"
+               [config]="config"
+               [clickenable]="config.click ? config.click.indexOf(i) > -1 : false"
+               [mouseenable]="config.mouseover ? config.mouseover.indexOf(i) > -1 : false"
+               [cssenable]="config.classscope.length > -1 ? config.classscope.indexOf(i) > -1 : false"
+               [attr.id]="svg.svg.g[i]['@id']"
+               [attr.class]="svg.svg.g[i]['@class']"
+               [attr.style]="svg.svg.g[i]['@style']"
+               [attr.transform]="svg.svg.g[i]['@transform']"
+               (shapeClick)="onShapeClick($event)"
+               (shapeMouse)="onShapeMouse($event)"
+               lc-svg-g></svg:g><!-- SVG Shape Data -->
+    </ng-container>
+</svg>

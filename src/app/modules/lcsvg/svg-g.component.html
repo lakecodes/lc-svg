@@ -1,0 +1,90 @@
+<ng-container *ngFor="let grp of (g?.length > 0 ? g : [g])">
+  <ng-container *ngFor="let gkey of grp | returnKeys">
+      <ng-container [ngSwitch]="gkey">
+
+          <ng-container *ngSwitchCase="'circle'"><!-- SVG Circle -->
+              <svg:circle *ngFor="let c of (grp.circle?.length > 0 ? grp.circle : [grp.circle])" [attr.id]="c['@id']" [attr.data-name]="c['@data-name']" [attr.class]="c['@class']" [attr.cx]="c['@cx']" [attr.cy]="c['@cy']" [attr.r]="c['@r']" [attr.transform]="c['@transform']" [attr.style]="c['@style']" />
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'ellipse'"><!-- SVG Ellipse -->
+              <svg:ellipse *ngFor="let e of (grp.ellipse?.length > 0 ? grp.ellipse : [grp.ellipse])" [attr.id]="e['@id']" [attr.data-name]="e['@data-name']" [attr.class]="e['@class']" [attr.cx]="e['@cx']" [attr.cy]="e['@cy']" [attr.rx]="e['@rx']" [attr.ry]="e['@ry']" [attr.transform]="e['@transform']" [attr.style]="e['@style']" />
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'line'"><!-- SVG Line -->
+              <svg:line *ngFor="let l of (grp.line?.length > 0 ? grp.line: [grp.line])" [attr.id]="l['@id']" [attr.class]="l['@class']" [attr.x1]="l['@x1']" [attr.x2]="l['@x2']" [attr.y1]="l['@y1']" [attr.y2]="l['@y2']" [attr.stroke]="l['@stroke']" [attr.stroke-width]="l['@stroke-width']" [attr.transform]="l['@transform']" [attr.style]="l['@style']"></svg:line>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'path'"><!-- SVG Path -->
+              <svg:path *ngFor="let p of (grp.path?.length > 0 ? grp.path : [grp.path])" [attr.id]="p['@id']" [attr.data-name]="p['@data-name']" [attr.class]="p['@class']" [attr.d]="p['@d']" [attr.stroke]="p['@stroke']" [attr.stroke-width]="p['@stroke-width']" [attr.fill]="p['@fill']" [attr.style]="p['@style']" />
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'polygon'"><!-- SVG Polygon -->
+              <svg:polygon *ngFor="let p of (grp.polygon?.length > 0 ? grp.polygon: [grp.polygon])" [attr.id]="p['@id']" [attr.class]="p['@class']" [attr.points]="p['@points']" [attr.stroke]="p['@stroke']" [attr.stroke-width]="p['@stroke-width']" [attr.fill]="p['@fill']" [attr.transform]="p['@transform']" [attr.style]="p['@style']"></svg:polygon>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'polyline'"><!-- SVG Line -->
+              <svg:polyline *ngFor="let p of (grp.polyline?.length > 0 ? grp.polyline: [grp.polyline])"
+                      [attr.id]="p['@id']" [attr.class]="p['@class']"
+                      [attr.points]="p['@points']"
+                      [attr.stroke]="p['@stroke']"
+                      [attr.stroke-width]="p['@stroke-width']"
+                      [attr.fill]="p['@fill']"
+                      [attr.transform]="p['@transform']"
+                      [attr.style]="p['@style']"></svg:polyline>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'rect'"><!-- SVG Rect -->
+              <svg:rect *ngFor="let r of (grp.rect?.length > 0 ? grp.rect : [grp.rect])"
+                      [attr.id]="r['@id']"
+                      [attr.data-name]="r['@data-name']"
+                      [attr.class]="r['@class']" [attr.x]="r['@x']"
+                      [attr.y]="r['@y']"
+                      [attr.rx]="r['@rx']"
+                      [attr.ry]="r['@ry']"
+                      [attr.width]="r['@width']"
+                      [attr.height]="r['@height']"
+                      [attr.style]="r['@style']">
+              </svg:rect>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'text'"><!-- SVG Text -->
+              <svg:text *ngFor="let t of (grp.text?.length > 0 ? grp.text : [grp.text])"
+                      [attr.id]="t['@id']"
+                      [attr.class]="t['@class']"
+                      [attr.data-name]="t['@data-name']"
+                      [attr.x]="t['@x']"
+                      [attr.y]="t['@y']"
+                      [attr.dx]="t['@dx']"
+                      [attr.dy]="t['@dy']"
+                      [attr.text-anchor]="t['@text-anchor']"
+                      [attr.transform]="t['@transform']"
+                      [attr.style]="t['@style']">{{t['#text'] ? t['#text'] : t['_']}}
+                  <ng-container *ngIf="t.tspan"><!-- SVG Tspan -->
+                      <svg:tspan *ngFor="let sp of (t.tspan?.length > 0 ? t.tspan : [t.tspan])"
+                          [attr.id]="sp['@id']"
+                          [attr.class]="sp['@class']"
+                          [attr.x]="sp['@x']"
+                          [attr.y]="sp['@y']"
+                          [attr.dx]="sp['@dx']"
+                          [attr.dy]="sp['@dy']"
+                          [attr.rotate]="sp['@rotate']"
+                          [attr.style]="sp['@style']"
+                          [attr.xml:space]="sp['@xml:space']">{{sp['#text'] ? sp['#text'] : sp['_']}}</svg:tspan>
+                  </ng-container>
+              </svg:text>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'g'"><!-- SVG Group -->
+              <svg:g *ngFor="let g of (grp.g?.length > 0 ? grp.g : [grp.g]); let i = index;"
+                     (click)="clickenable ? click($event) : null"
+                     (mouseenter)="mouseenable ? mouse($event) : null"
+                     [attr.id]="g['@id']"
+                     [attr.class]="(config && cssenable) ? (g['@class'] ? config.classes.push(g['@class']) : config.classes) : g['@class']"
+                     [attr.data-v]="i"
+                     [g]="g"
+                     lc-svg-g></svg:g>
+          </ng-container>
+
+      </ng-container>
+  </ng-container>
+</ng-container>
