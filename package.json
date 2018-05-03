@@ -1,6 +1,6 @@
 {
   "name": "lc-svg",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -11,6 +11,20 @@
     "e2e": "ng e2e",
     "packagr": "ng-packagr -p ng-package.json"
   },
+  "keywords": [
+    "angular",
+    "svg",
+    "xml",
+    "json",
+    "convert",
+    "illustrator",
+    "service",
+    "angular 2",
+    "angular 4",
+    "angular 5",
+    "lakecodes",
+    "lake county"
+  ],
   "private": false,
   "dependencies": {
     "@angular/animations": "^5.0.0",
